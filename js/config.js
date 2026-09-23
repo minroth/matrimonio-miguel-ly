@@ -1,7 +1,6 @@
 /* ==========================================================
    CONTENIDO DE LA WEB
    Todo lo que ves en la página sale de este archivo.
-   Edita los textos aquí y no necesitas tocar nada más.
    ========================================================== */
 
 window.BODA = {
@@ -10,43 +9,39 @@ window.BODA = {
   novios: ["Ly", "Miguel"],
 
   mensaje:
-    "Acompáñanos a celebrar el comienzo de un nuevo capítulo, rodeados de naturaleza, buena comida y las personas que más queremos.",
+    "Hay momentos en la vida que se atesoran para siempre, y nos encantaría que este fuera uno de ellos. Acompáñanos a celebrar nuestra boda, rodeados de naturaleza, rica comida y el cariño de las personas que más queremos.",
 
-  /* ---------- Fecha y hora ----------
-     Formato: AAAA-MM-DDTHH:MM:00-03:00
-     (-03:00 = horario de verano de Chile; en invierno sería -04:00) */
+  /* ---------- Fecha y hora ---------- */
   fecha: {
     iso: "2026-10-03T17:30:00-03:00",
-    duracionHoras: 6            // para el evento del calendario
+    duracionHoras: 6
   },
 
   /* ---------- Lugar ---------- */
   lugar: {
     nombre: "Casona de los Mesas",
     direccion: "Lillo 371, Isla de Maipo.",
-    // Texto que se busca en Google Maps / Waze
     busqueda: "Casona de los Mesas, Lillo 371, Isla de Maipo, Chile",
-    indicaciones: ""            // ej: "Hay estacionamiento dentro del recinto." (opcional)
+    indicaciones: "Habrá estacionamiento disponible dentro del recinto para que lleguen con total tranquilidad."
   },
 
   /* ---------- Dress code ---------- */
   dressCode: {
-    titulo: "Dress Code",
+    titulo: "¿Cómo venir?",
     parrafos: [
-      "No hay un código estricto.",
-      "Nos encantaría que eligieras un atuendo que te haga sentir especial y auténtic@.",
-      "Piensa en una celebración al aire libre: colores inspirados en la tierra, el bosque y la primavera, y zapatos cómodos para caminar entre jardines."
+      "Lo más importante para nosotros es que nos acompañen y se sientan cómodos tal como son.",
+      "Nuestra celebración será al aire libre entre jardines y árboles, así que les sugerimos elegir un atuendo semi-formal y zapatos cómodos para disfrutar sin preocupaciones.",
+      "Si quieren inspirarse con los colores de la tierra y la primavera, aquí les dejamos una paleta de referencia (¡no es obligación seguirla estrictamente!):"
     ],
-    cierre: "Lo más importante es que vengas siendo tú.",
-    // Paleta de inspiración (toca un color para ver su nombre). Puedes quitar o agregar.
+    cierre: "Vengan con ganas de celebrar y pasarlo bien, eso es lo único que necesitamos.",
     paleta: [
-      { nombre: "Oliva",       color: "#7b8459" },
-      { nombre: "Salvia",      color: "#a2a883" },
-      { nombre: "Arena",       color: "#d9c8a6" },
-      { nombre: "Terracota",   color: "#b8735a" },
+      { nombre: "Oliva", color: "#7b8459" },
+      { nombre: "Salvia", color: "#a2a883" },
+      { nombre: "Arena", color: "#d9c8a6" },
+      { nombre: "Terracota", color: "#b8735a" },
       { nombre: "Café tierra", color: "#6b4a2c" },
-      { nombre: "Durazno",     color: "#e6b99a" },
-      { nombre: "Azul polvo",  color: "#8fa3b8" }
+      { nombre: "Durazno", color: "#e6b99a" },
+      { nombre: "Azul polvo", color: "#8fa3b8" }
     ]
   },
 
@@ -54,16 +49,15 @@ window.BODA = {
   regalo: {
     titulo: "Nuestra luna de miel",
     intro: [
-      "Si quieres hacernos un regalo, estaremos recibiendo aportes para nuestra luna de miel."
+      "La presencia de cada uno de ustedes es el mejor regalo que podríamos recibir. Si además desean hacernos un detalle para nuestra luna de miel y ayudarnos a dar el primer gran paso en esta nueva etapa, estaremos muy agradecidos."
     ],
-
     banco: {
       titular: "Lilian Valenzuela Silva",
-      banco:   "Banco Santander",
-      tipo:    "Cuenta Corriente",
-      numero:  "64527347",
-      rut:     "16657199-5",
-      correo:  "lilian.valenzuela@gmail.com"
+      banco: "Banco Santander",
+      tipo: "Cuenta Corriente",
+      numero: "64527347",
+      rut: "16657199-5",
+      correo: "lilian.valenzuela@gmail.com"
     }
   },
 
@@ -72,102 +66,29 @@ window.BODA = {
     activo: true,
     titulo: "Transporte",
     intro: [
-      "Organizamos transporte grupal hacia la Casona y de regreso a sus casas para quienes lo necesiten."
+      "Para que todos puedan relajarse y disfrutar al máximo sin preocuparse por manejar, organizamos transporte compartido de ida y regreso."
     ],
-
-    // Botón que abre tu formulario de Google
     formulario: {
-      activo: true,
-      texto: "Si aún no has avisado si necesitas transporte, complétalo aquí:",
-      boton: "Completar formulario",
-      url: "https://docs.google.com/forms/d/e/1FAIpQLSeQW7nGg2wAMfZFQ3UxYgZjrVd7KeWFv3KZVXt0JzF87AstvA/viewform?usp=header"
+      activo: false
     },
-
-    // Quién va en qué vehículo. Está cifrado (ver admin-encrypt.html) para que
-    // no sea legible por cualquiera que mire el código de la página: solo se
-    // puede leer con la clave correcta.
     privado: {
       activo: true,
-      titulo: "Ver los vehículos asignados",
-      texto: "Esta información es privada. Ingresa la clave que te compartimos por WhatsApp para verla.",
-      placeholder: "Clave",
-      boton: "Ver",
-      error: "Clave incorrecta. Revisa el mensaje de WhatsApp o pregúntale a los novios.",
-      buscarPlaceholder: "Busca tu nombre para ubicarte más rápido…",
-      // Generado con admin-encrypt.html · clave actual: pantufla
+      titulo: "Vehículos asignados",
+      texto: "Aquí podrán revisar el vehículo y el punto de salida que les fue asignado. Por privacidad, esta información está protegida: solo ingresen la clave secreta que les compartimos por WhatsApp.",
+      placeholder: "Clave secreta",
+      boton: "Ver mi transporte",
+      error: "Mmm, parece que la clave no es correcta. Revisen el mensaje de WhatsApp o consúltennos directamente.",
+      buscarPlaceholder: "Escribe tu nombre para buscarte más rápido…",
       cifrado: {
-        salt: "8AglIHcNj1byKHpNfbuCxQ==",
-        iv: "yEiXbm9YsxAu0+DF",
-        data: "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"
-      }
+			salt: "kNv5RD42G3gLverfDRLYbA==",
+			iv: "P3RZkcM9vlY2mAPm",
+			data: "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"
+		}
     }
-  },
-
-  /* ---------- Confirmación de asistencia ----------
-     El formulario arma un mensaje y lo envía por WhatsApp y/o correo
-     (no necesita servidor). Si no dejas ninguno, la sección se oculta.
-     WhatsApp: número con código de país y sin +, ej: "56912345678" */
-  rsvp: {
-    activo: true,
-    titulo: "¿Nos acompañas?",
-    texto: "Cuéntanos si vienes para poder organizarnos.",
-    whatsapp: "",
-    email: "lilian.valenzuela@gmail.com",
-    maxPersonas: 6
   },
 
   /* ---------- Cierre ---------- */
-  cierre: "¡Los esperamos!",
+  cierre: "¡Los esperamos con el corazón abierto!",
 
-  /* ==========================================================
-     SECCIONES EXTRA
-     Agrega aquí todo lo que quieras. Cada bloque es una hoja nueva.
-     Pon activo: true para mostrarla.
-     Tipos: "texto" | "cronograma" | "faq" | "galeria"
-     Opcional: despuesDe: "lugar" (id de la sección tras la que se inserta)
-              ids disponibles: inicio, lugar, dresscode, regalo, rsvp
-     ========================================================== */
-  extras: [
-    {
-      activo: false,
-      id: "programa",
-      tipo: "cronograma",
-      titulo: "Programa",
-      despuesDe: "lugar",
-      items: [
-        { hora: "17:30", titulo: "Bienvenida",  texto: "Recibimiento entre jardines." },
-        { hora: "18:00", titulo: "Ceremonia",   texto: "" },
-        { hora: "19:00", titulo: "Cena",        texto: "" },
-        { hora: "21:00", titulo: "Fiesta",      texto: "" }
-      ]
-    },
-    {
-      activo: false,
-      id: "preguntas",
-      tipo: "faq",
-      titulo: "Preguntas frecuentes",
-      items: [
-        { p: "¿Puedo llevar niños?",       r: "Escribe aquí tu respuesta." },
-        { p: "¿Hay estacionamiento?",      r: "Escribe aquí tu respuesta." },
-        { p: "¿Cómo llego desde Santiago?", r: "Escribe aquí tu respuesta." }
-      ]
-    },
-    {
-      activo: false,
-      id: "fotos",
-      tipo: "galeria",
-      titulo: "Nuestra historia",
-      // Sube tus fotos a la carpeta img/ y enuméralas aquí
-      fotos: [
-        // { src: "img/foto1.jpg", alt: "Descripción de la foto" }
-      ]
-    },
-    {
-      activo: false,
-      id: "hospedaje",
-      tipo: "texto",
-      titulo: "Dónde alojar",
-      parrafos: ["Escribe aquí tus recomendaciones."]
-    }
-  ]
+  extras: []
 };
