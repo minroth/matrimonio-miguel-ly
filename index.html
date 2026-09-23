@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ly &amp; Miguel · 3 de octubre de 2026</title>
+  <meta name="description" content="Te invitamos a celebrar nuestro matrimonio el sábado 3 de octubre de 2026 en Isla de Maipo.">
+  <meta name="theme-color" content="#e9e2d2">
+  <meta property="og:title" content="Ly & Miguel · Nuestro matrimonio">
+  <meta property="og:description" content="Sábado 3 de octubre de 2026 · Casona de los Mesas, Isla de Maipo.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+SC:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- Filtro que da el borde irregular de papel de algodón a cada hoja -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="deckle" x="-4%" y="-4%" width="108%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <a class="skip" href="#inicio">Saltar al contenido</a>
+  <header class="nav" id="nav"><nav id="navLinks" aria-label="Secciones"></nav></header>
+
+  <main id="app">
+
+    <!-- ============ INICIO ============ -->
+    <section class="sheet hero" id="inicio" data-nav="Inicio">
+      <div class="sheet-inner">
+        <h1 class="names"><span id="n1"></span> <span class="amp">&amp;</span> <span id="n2"></span></h1>
+        <div class="divider"></div>
+        <p class="lead" id="mensaje"></p>
+        <div class="divider"></div>
+
+        <div class="datebox" id="datebox" aria-label="Fecha y hora"></div>
+        <p class="venue"><strong id="lugarNombre"></strong><br><span id="lugarDir"></span></p>
+
+        <div class="countdown" id="countdown" aria-live="off"></div>
+
+        <div class="btn-row">
+          <a class="btn primary" id="btnMapa" target="_blank" rel="noopener">Cómo llegar</a>
+          <a class="btn" id="btnGoogleCal" target="_blank" rel="noopener">Google Calendar</a>
+          <button class="btn" id="btnIcs" type="button">Apple / Outlook</button>
+        </div>
+
+        <figure class="couple">
+          <img src="img/pareja.jpg" alt="Ilustración en acuarela de Miguel pidiéndole matrimonio a Ly" width="775" height="445">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ LUGAR ============ -->
+    <section class="sheet" id="lugar" data-nav="Lugar">
+      <div class="sheet-inner">
+        <h2 class="title">Dónde será</h2>
+        <div class="divider"></div>
+        <p class="venue"><strong id="lugarNombre2"></strong><br><span id="lugarDir2"></span></p>
+        <p class="note" id="lugarIndic" hidden></p>
+        <div class="map">
+          <iframe id="mapa" title="Mapa del lugar" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" id="btnMapa2" target="_blank" rel="noopener">Abrir en Google Maps</a>
+          <a class="btn" id="btnWaze" target="_blank" rel="noopener">Abrir en Waze</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DRESS CODE ============ -->
+    <section class="sheet" id="dresscode" data-nav="Dress code">
+      <div class="sheet-inner">
+        <h2 class="title" id="dcTitulo"></h2>
+        <div class="divider"></div>
+        <div id="dcTexto"></div>
+        <div class="palette" id="palette" role="list"></div>
+        <p class="palette-name" id="paletteName" aria-live="polite">&nbsp;</p>
+        <p class="closing" id="dcCierre"></p>
+      </div>
+    </section>
+
+    <!-- ============ REGALO ============ -->
+    <section class="sheet" id="regalo" data-nav="Regalo">
+      <div class="sheet-inner">
+        <h2 class="title" id="rgTitulo"></h2>
+        <div class="divider"></div>
+        <div id="rgIntro"></div>
+
+        <div class="bank" id="bank"></div>
+      </div>
+    </section>
+
+    <!-- ============ TRANSPORTE ============ -->
+    <section class="sheet" id="transporte" data-nav="Transporte">
+      <div class="sheet-inner">
+        <h2 class="title" id="trTitulo"></h2>
+        <div class="divider"></div>
+        <div id="trIntro"></div>
+
+        <div id="trForm" hidden>
+          <p id="trFormTexto"></p>
+          <div class="btn-row">
+            <a class="btn primary" id="trFormBtn" target="_blank" rel="noopener"></a>
+          </div>
+        </div>
+
+        <div class="divider" id="trDivider"></div>
+
+        <div id="trPrivado">
+          <h3 class="sub" id="trPrivTitulo"></h3>
+          <p class="note" id="trPrivTexto"></p>
+
+          <form class="rsvp" id="trForm2" autocomplete="off">
+            <div class="field">
+              <label for="trClave" id="trClaveLabel"></label>
+              <input id="trClave" type="password" autocomplete="current-password">
+            </div>
+            <div class="btn-row">
+              <button class="btn primary" id="trVer" type="submit"></button>
+            </div>
+            <p class="note" id="trError" role="alert" hidden></p>
+          </form>
+
+          <div id="trResultado" hidden>
+            <div class="field" style="max-width:26rem;margin:0 auto 1.4rem">
+              <label for="trBuscar" class="sr">Buscar</label>
+              <input id="trBuscar" type="search">
+            </div>
+            <div id="trTablas"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RSVP ============ -->
+    <section class="sheet" id="rsvp" data-nav="Asistencia">
+      <div class="sheet-inner">
+        <h2 class="title" id="rsTitulo"></h2>
+        <div class="divider"></div>
+        <p class="lead" id="rsTexto"></p>
+        <form class="rsvp" id="rsvpForm" novalidate>
+          <div class="field">
+            <label for="rsNombre">Tu nombre</label>
+            <input id="rsNombre" name="nombre" type="text" autocomplete="name" required>
+          </div>
+          <fieldset class="choice">
+            <legend class="sr">¿Vienes?</legend>
+            <label><input type="radio" name="asiste" value="si" checked><span>Sí, ahí estaré</span></label>
+            <label><input type="radio" name="asiste" value="no"><span>No podré ir</span></label>
+          </fieldset>
+          <div class="field" id="fieldPersonas">
+            <label for="rsPersonas">¿Cuántas personas vienen?</label>
+            <select id="rsPersonas" name="personas"></select>
+          </div>
+          <div class="field" id="fieldComida">
+            <label for="rsComida">Alergias o restricciones alimentarias</label>
+            <input id="rsComida" name="comida" type="text" placeholder="Opcional">
+          </div>
+          <div class="field">
+            <label for="rsMensaje">Un mensaje para nosotros</label>
+            <textarea id="rsMensaje" name="mensaje" rows="3" placeholder="Opcional"></textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn primary" id="rsWa" type="button" hidden>Enviar por WhatsApp</button>
+            <button class="btn primary" id="rsMail" type="button" hidden>Enviar por correo</button>
+            <button class="btn" id="rsCopy" type="button">Copiar mensaje</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Aquí se insertan las secciones extra definidas en config.js -->
+    <div id="extras"></div>
+
+    <footer class="closing-sheet">
+      <p class="farewell" id="cierre"></p>
+      <p class="tiny" id="pie"></p>
+    </footer>
+  </main>
+
+  <dialog id="lightbox" aria-label="Foto ampliada">
+    <button type="button" class="lb-close" aria-label="Cerrar">×</button>
+    <img alt="">
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
