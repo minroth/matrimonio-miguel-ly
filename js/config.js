@@ -31,17 +31,20 @@ window.BODA = {
     parrafos: [
       "Lo más importante para nosotros es que nos acompañen y se sientan cómodos tal como son.",
       "Nuestra celebración será al aire libre entre jardines y árboles, así que les sugerimos elegir un atuendo semi-formal y zapatos cómodos para disfrutar sin preocupaciones.",
-      "Si quieren inspirarse con los colores de la tierra y la primavera, aquí les dejamos una paleta de referencia (¡no es obligación seguirla estrictamente!):"
+      "Si quieren, pueden inspirarse en los colores de la tierra y la primavera."
     ],
     cierre: "Vengan con ganas de celebrar y pasarlo bien, eso es lo único que necesitamos.",
     paleta: [
+	  { nombre: "Lavanda", color: "#9b8ea9" },
+      { nombre: "Rosa pálido", color: "#d8a4a5" },
+      { nombre: "Azahar", color: "#f4e04d" },
+      { nombre: "Vino tinto", color: "#6a2e35" },
       { nombre: "Oliva", color: "#7b8459" },
       { nombre: "Salvia", color: "#a2a883" },
-      { nombre: "Arena", color: "#d9c8a6" },
       { nombre: "Terracota", color: "#b8735a" },
       { nombre: "Café tierra", color: "#6b4a2c" },
-      { nombre: "Durazno", color: "#e6b99a" },
-      { nombre: "Azul polvo", color: "#8fa3b8" }
+      { nombre: "Durazno", color: "#e6b99a" }
+      
     ]
   },
 
@@ -90,5 +93,31 @@ window.BODA = {
   /* ---------- Cierre ---------- */
   cierre: "¡Los esperamos con el corazón abierto!",
 
-  extras: []
+  extras: [
+    {
+      activo: true,
+      id: "fotos",
+      tipo: "texto",
+      titulo: "Nuestra historia y fotos",
+      parrafos: [
+        "Las fotos del matrimonio están todavía en el horno (¡el matrimonio es recién el 3 de octubre de 2026!).",
+        "Pero queremos que seas parte de los recuerdos. ¿Sacaste una gran foto durante la fiesta? Súbela directamente a nuestro álbum compartido escaneando el código QR o ingresando al enlace:"
+      ],
+      qr: "img/qr.jpg",
+      enlace: {
+        url: "https://photos.app.goo.gl/q7dE3bxHVu3ePotp8",
+        texto: "Pincha aquí para abrir el álbum de fotos"
+      }
+    },
+    {
+      activo: true,
+      id: "barra-menu",
+      tipo: "texto",
+      titulo: "Bebidas",
+      parrafos: [
+        "🍹 Cócteles: Tendremos Aperol Spritz, Ramazzotti Spritz, Gin Tonic, Pisco Sour, Piscola, cerveza en botella, Chilcano o St. Germain Spritz, y Tropical Gin.",
+        "✨ Y para quienes no beben alcohol:  Habrá opciones de mocktails (sin alcohol), Bebidas, agua mineral con y sin gas, jugos naturales."
+      ]
+    }
+  ]
 };

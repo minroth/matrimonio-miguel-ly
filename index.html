@@ -139,42 +139,6 @@
       </div>
     </section>
 
-    <!-- ============ RSVP ============ -->
-    <section class="sheet" id="rsvp" data-nav="Asistencia">
-      <div class="sheet-inner">
-        <h2 class="title" id="rsTitulo"></h2>
-        <div class="divider"></div>
-        <p class="lead" id="rsTexto"></p>
-        <form class="rsvp" id="rsvpForm" novalidate>
-          <div class="field">
-            <label for="rsNombre">Tu nombre</label>
-            <input id="rsNombre" name="nombre" type="text" autocomplete="name" required>
-          </div>
-          <fieldset class="choice">
-            <legend class="sr">¿Vienes?</legend>
-            <label><input type="radio" name="asiste" value="si" checked><span>Sí, ahí estaré</span></label>
-            <label><input type="radio" name="asiste" value="no"><span>No podré ir</span></label>
-          </fieldset>
-          <div class="field" id="fieldPersonas">
-            <label for="rsPersonas">¿Cuántas personas vienen?</label>
-            <select id="rsPersonas" name="personas"></select>
-          </div>
-          <div class="field" id="fieldComida">
-            <label for="rsComida">Alergias o restricciones alimentarias</label>
-            <input id="rsComida" name="comida" type="text" placeholder="Opcional">
-          </div>
-          <div class="field">
-            <label for="rsMensaje">Un mensaje para nosotros</label>
-            <textarea id="rsMensaje" name="mensaje" rows="3" placeholder="Opcional"></textarea>
-          </div>
-          <div class="btn-row">
-            <button class="btn primary" id="rsWa" type="button" hidden>Enviar por WhatsApp</button>
-            <button class="btn primary" id="rsMail" type="button" hidden>Enviar por correo</button>
-            <button class="btn" id="rsCopy" type="button">Copiar mensaje</button>
-          </div>
-        </form>
-      </div>
-    </section>
 
     <!-- Aquí se insertan las secciones extra definidas en config.js -->
     <div id="extras"></div>

@@ -8,8 +8,7 @@
   if (!C) { console.error('No se encontró js/config.js'); return; }
 
   /* ---------- Utilidades ---------- */
-  const $  = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const $  = (s, r = document) => r.querySelector(s);   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const pad = n => String(n).padStart(2, '0');
 
   // Crea elementos sin usar innerHTML (así el texto siempre es seguro)
@@ -225,7 +224,6 @@
     const priv = t.privado;
     if (!priv || !priv.activo || !priv.cifrado) { $('#trPrivado').remove(); $('#trDivider').remove(); return; }
     if (!('crypto' in window) || !window.crypto.subtle) {
-      // Sin HTTPS/localhost el navegador no ofrece cifrado: mostramos solo el aviso.
       $('#trPrivado').replaceChildren(h('p', { class: 'note', text: 'Esta parte necesita ver la página por https:// o en un servidor local para funcionar.' }));
       return;
     }
@@ -292,64 +290,11 @@
       }
     });
 
-    $('#trBuscar').addEventListener('input', e => {
-      const q = e.target.value.trim().toLowerCase();
-      $$('.veh-row', $('#trTablas')).forEach(row => { row.hidden = q && !row.dataset.name.includes(q); });
-      $$('.veh-group', $('#trTablas')).forEach(g => { g.hidden = $$('.veh-row', g).every(r => r.hidden); });
+    $('#trBuscar').addEventListener('input', e => {       const q = e.target.value.trim().toLowerCase();       $$('.veh-row', $('#trTablas')).forEach(row => { row.hidden = q && !row.dataset.name.includes(q); });       $$('.veh-group', $('#trTablas')).forEach(g => { g.hidden = $$('.veh-row', g).every(r => r.hidden); });
     });
   })();
 
-  /* ---------- Confirmación de asistencia ---------- */
-  (function rsvp() {
-    const r = C.rsvp;
-    const sec = $('#rsvp');
-    if (!r || !r.activo || (!r.whatsapp && !r.email)) { sec.remove(); return; }
-
-    $('#rsTitulo').textContent = r.titulo;
-    $('#rsTexto').textContent = r.texto;
-    const sel = $('#rsPersonas');
-    for (let i = 1; i <= (r.maxPersonas || 6); i++) sel.append(h('option', { value: i, text: i }));
-
-    const form = $('#rsvpForm');
-    const asiste = () => form.asiste.value === 'si';
-    form.addEventListener('change', () => {
-      $('#fieldPersonas').hidden = !asiste();
-      $('#fieldComida').hidden = !asiste();
-    });
-
-    function mensaje() {
-      const n = form.nombre.value.trim();
-      let m = `¡Hola ${C.novios[0]} y ${C.novios[1]}! Soy ${n}. `;
-      if (asiste()) {
-        const p = Number(form.personas.value);
-        m += `Confirmo mi asistencia al matrimonio (${p} ${p === 1 ? 'persona' : 'personas'}).`;
-        if (form.comida.value.trim()) m += `\nRestricciones alimentarias: ${form.comida.value.trim()}.`;
-      } else {
-        m += 'Lamentablemente no podré acompañarlos, pero les mando un abrazo enorme.';
-      }
-      if (form.mensaje.value.trim()) m += `\n\n${form.mensaje.value.trim()}`;
-      return m;
-    }
-    function valido() {
-      const ok = form.nombre.value.trim().length > 0;
-      form.nombre.closest('.field').classList.toggle('invalid', !ok);
-      if (!ok) { toast('Escribe tu nombre'); form.nombre.focus(); }
-      return ok;
-    }
-
-    if (r.whatsapp) {
-      const b = $('#rsWa'); b.hidden = false;
-      b.addEventListener('click', () => valido() &&
-        window.open(`https://wa.me/${r.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(mensaje())}`, '_blank', 'noopener'));
-    }
-    if (r.email) {
-      const b = $('#rsMail'); b.hidden = false;
-      b.addEventListener('click', () => valido() &&
-        (location.href = `mailto:${r.email}?subject=${encodeURIComponent('Asistencia matrimonio ' + nombres)}&body=${encodeURIComponent(mensaje())}`));
-    }
-    $('#rsCopy').addEventListener('click', () => valido() && copy(mensaje(), 'Mensaje copiado'));
-    form.addEventListener('submit', e => e.preventDefault());
-  })();
+  // NOTA: La sección de confirmación de asistencia (rsvp) fue eliminada por completo.
 
   /* ---------- Secciones extra ---------- */
   (function extras() {
@@ -357,7 +302,26 @@
     const last = {};   // último bloque insertado tras cada sección, para respetar el orden
 
     const builders = {
-      texto: x => x.parrafos.map(t => h('p', { text: t })),
+      texto: x => {
+        const frag = document.createDocumentFragment();
+        x.parrafos.forEach(t => frag.append(h('p', { text: t })));
+        
+        // Renderizar código QR centrado
+        if (x.qr) {
+          frag.append(h('div', { style: 'margin: 1.5rem auto; text-align: center;' },
+            h('img', { src: x.qr, alt: 'Código QR álbum de fotos', style: 'display: block; margin: 0 auto; max-width: 160px; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);' })
+          ));
+        }
+
+        // Renderizar botón de enlace centrado
+        if (x.enlace) {
+          frag.append(h('div', { style: 'margin-top: 1.2rem; text-align: center;' },
+            h('a', { class: 'btn primary', href: x.enlace.url, target: '_blank', rel: 'noopener', text: x.enlace.texto })
+          ));
+        }
+
+        return frag;
+      },
 
       cronograma: x => h('ol', { class: 'timeline' },
         x.items.map(i => h('li', {},
@@ -403,11 +367,7 @@
 
   /* ---------- Navegación ---------- */
   const sheets = $$('.sheet[data-nav]');
-  const nav = $('#navLinks');
-  sheets.forEach(s => nav.append(h('a', { href: '#' + s.id, text: s.dataset.nav, 'data-for': s.id })));
-
-  if ('IntersectionObserver' in window) {
-    const links = $$('a', nav);
+  const nav = $('#navLinks');   sheets.forEach(s => nav.append(h('a', { href: '#' + s.id, text: s.dataset.nav, 'data-for': s.id })));    if ('IntersectionObserver' in window) {     const links = $$('a', nav);
     const io = new IntersectionObserver(entries => {
       entries.forEach(en => {
         if (!en.isIntersecting) return;
@@ -480,18 +440,12 @@
     if (!force && lastH.get(sheet) === key) return;
     lastH.set(sheet, key);
     const idx = $$('.sheet').indexOf(sheet);
-    $$('.sprig', sheet).forEach((el, j) => { el.innerHTML = sprigSVG(w, hh, idx * 7 + j * 3 + 2); });
+    $('.sprig', sheet).innerHTML = sprigSVG(w, hh, idx * 7 + 0);$('.sprig.right', sheet).innerHTML = sprigSVG(w, hh, idx * 7 + 3);
   }
 
-  $$('.sheet').forEach(sh => {
-    sh.prepend(h('div', { class: 'sprig left', 'aria-hidden': 'true' }), h('div', { class: 'sprig right', 'aria-hidden': 'true' }));
-    drawSprigs(sh, true);
-  });
-  if ('ResizeObserver' in window) {
-    const ro = new ResizeObserver(es => es.forEach(e => drawSprigs(e.target)));
-    $$('.sheet').forEach(sh => ro.observe(sh));
+  $$('.sheet').forEach(sh => {     sh.prepend(h('div', { class: 'sprig left', 'aria-hidden': 'true' }), h('div', { class: 'sprig right', 'aria-hidden': 'true' }));     drawSprigs(sh, true);   });    if ('ResizeObserver' in window) {     const ro = new ResizeObserver(es => es.forEach(e => drawSprigs(e.target)));     $$
+('.sheet').forEach(sh => ro.observe(sh));
   } else {
-    window.addEventListener('resize', () => $$('.sheet').forEach(sh => drawSprigs(sh)));
+    window.addEventListener('resize', () => $$('.sheet').forEach(sh => drawSprigs(sh)));   }    if (document.fonts && document.fonts.ready) {     document.fonts.ready.then(() => $$('.sheet').forEach(sh => drawSprigs(sh)));
   }
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => $$('.sheet').forEach(sh => drawSprigs(sh)));
 })();
